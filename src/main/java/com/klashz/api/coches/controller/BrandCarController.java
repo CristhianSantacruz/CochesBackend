@@ -41,7 +41,7 @@ public class BrandCarController {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(brandCarService.save(marcaCochePojo));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
