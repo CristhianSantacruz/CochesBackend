@@ -1,4 +1,4 @@
-package com.klashz.api.coches.config.controller;
+package com.klashz.api.coches.controller;
 import com.klashz.api.coches.domain.dto.CustomerDto;
 import com.klashz.api.coches.domain.dto.CustomerPasswordDto;
 import com.klashz.api.coches.domain.service.impl.CustomerService;

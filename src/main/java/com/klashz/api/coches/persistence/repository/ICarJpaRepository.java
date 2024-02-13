@@ -9,8 +9,8 @@ import java.util.List;
 public interface ICarJpaRepository extends JpaRepository<CarEntity,Long> {
 
 
-    @Query("select c from CarEntity c where c.branCardId = ?1")
-    List<CarEntity> findAllCarsByBrandId(Long brandId);
+    @Query("select c from CarEntity  c where  c.branCardId = ?1")
+    List<CarEntity> findAllByBrandCarId(Long brandId);
 
-    List<CarEntity> findAllByPriceLessThan(Double price);
+    List<CarEntity> findAllByPriceLessThanOrderByPriceDesc(Double price);
 }

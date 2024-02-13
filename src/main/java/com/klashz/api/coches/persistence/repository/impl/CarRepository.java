@@ -44,11 +44,11 @@ public class CarRepository implements ICarRepository {
 
     @Override
     public List<CarDto> getByIdBrandCar(Long idBrandCar) {
-        return iCarMapper.toCarsDto(iCarJpaRepository.findAllCarsByBrandId(idBrandCar));
+        return iCarMapper.toCarsDto(iCarJpaRepository.findAllByBrandCarId(idBrandCar));
     }
 
     @Override
     public List<CarDto> getByPriceLessThan(Double price) {
-        return iCarMapper.toCarsDto(iCarJpaRepository.findAllByPriceLessThan(price));
+        return iCarMapper.toCarsDto(iCarJpaRepository.findAllByPriceLessThanOrderByPriceDesc(price));
     }
 }
