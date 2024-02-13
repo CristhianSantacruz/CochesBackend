@@ -1,4 +1,4 @@
-package com.klashz.api.coches.domain.pojo;
+package com.klashz.api.coches.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 /**
  * Pojo de Marca Coche
  */
-public class MarcaCochePojo {
+public class BrandCarDto {
     /**
      * Id de la marca
      */

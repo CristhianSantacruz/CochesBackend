@@ -4,16 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Getter
-@Setter
-@Table(name = "marca_coche")
-/**/
-public class MarcaCocheEntity {
+import java.util.ArrayList;
+import java.util.List;
 
+@Getter @Setter
+@Entity
+@Table(name = "marca_coche")
+public class BrandCarEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "descripcion")
     private String description;
+
+    @OneToMany(mappedBy = "brandCarEntity", orphanRemoval = true)
+    private List<CarEntity> carEntities;
+
 }

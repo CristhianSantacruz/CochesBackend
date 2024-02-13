@@ -1,30 +1,30 @@
 package com.klashz.api.coches.domain.repository;
 
-import com.klashz.api.coches.domain.pojo.MarcaCochePojo;
+import com.klashz.api.coches.domain.dto.BrandCarDto;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IMarcaCocheRepository {
+public interface IBrandCarRepository {
     /**
      * Devuele una marca de coche por su id
      * @param id Id de marca coche
      * @return Retorna solo un marca coche
      */
-    Optional<MarcaCochePojo> findById(Long id);
+    Optional<BrandCarDto> findById(Long id);
 
     /**
      * Devuele una lista de los marcaCochePojo
      * @return una lista de marcaCochePojo
      */
-    List<MarcaCochePojo> getAll();
+    List<BrandCarDto> getAll();
 
     /**
      *
-     * @param newmarcaCochePojo Nueva Marca
+     * @param newmarcaCocheDto Nueva Marca
      * @return Marca Coche Guardado
      */
-    MarcaCochePojo save(MarcaCochePojo newmarcaCochePojo);
+    BrandCarDto save(BrandCarDto newmarcaCocheDto);
 
     /**
      * Borrar marca por id
