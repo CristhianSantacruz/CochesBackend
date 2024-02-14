@@ -13,6 +13,7 @@ public interface ICarMapper {
     CarDto toCarDto(CarEntity carEntity);
 
     @Mapping(target = "brandCarEntity",ignore = true)
+    @Mapping(target="carPurchaseEntities",ignore = true)
     CarEntity toCarEntity(CarDto carDto);
 
     List<CarDto> toCarsDto(List<CarEntity> carEntityList);

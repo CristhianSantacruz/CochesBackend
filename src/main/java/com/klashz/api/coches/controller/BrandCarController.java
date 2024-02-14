@@ -1,5 +1,6 @@
 package com.klashz.api.coches.controller;
 import com.klashz.api.coches.domain.dto.BrandCarDto;
+import com.klashz.api.coches.domain.service.IMarcaCocheService;
 import com.klashz.api.coches.domain.service.impl.MarcaCocheService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import java.util.List;
 @RequestMapping("/marca")
 public class BrandCarController {
 
-    private final MarcaCocheService brandCarService;
+    private final IMarcaCocheService brandCarService;
 
 
     public BrandCarController(MarcaCocheService brandCarService) {

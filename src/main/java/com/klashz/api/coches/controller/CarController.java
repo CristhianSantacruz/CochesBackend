@@ -2,6 +2,7 @@ package com.klashz.api.coches.controller;
 
 import com.klashz.api.coches.domain.dto.CarDto;
 
+import com.klashz.api.coches.domain.service.ICarService;
 import com.klashz.api.coches.domain.service.impl.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/car")
 public class CarController {
-    private final CarService carService;
+    private final ICarService carService;
     public CarController(CarService carService) {
         this.carService = carService;
     }
@@ -36,21 +37,22 @@ public class CarController {
         return ResponseEntity.ok(carService.getByPriceLessThan(price));
     }
     @PostMapping()
-    public ResponseEntity<CarDto> save(CarDto carDto){
+    public ResponseEntity<CarDto> save(@RequestBody CarDto carDto){
         CarDto carDto1 = carService.save(carDto);
         if(carDto1!= null){
+            System.out.println(carDto1);
             return  ResponseEntity.status(HttpStatus.CREATED)
                     .body(carDto1);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     @PutMapping()
-    public ResponseEntity<CarDto> update(CarDto carDto){
+    public ResponseEntity<CarDto> update(@RequestBody CarDto carDto){
         return ResponseEntity.of(carService.update(carDto));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Boolean> delete(Long serial){
+    @DeleteMapping("/{serial}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long serial){
         return new ResponseEntity<>(carService.delete(serial) ?
                 HttpStatus.OK :
                 HttpStatus.NOT_FOUND);

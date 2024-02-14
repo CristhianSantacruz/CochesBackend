@@ -4,7 +4,10 @@ import com.klashz.api.coches.domain.dto.CustomerDto;
 import com.klashz.api.coches.domain.dto.CustomerPasswordDto;
 import com.klashz.api.coches.domain.repository.ICustomerRepository;
 import com.klashz.api.coches.domain.service.ICustomerService;
+import com.klashz.api.coches.exception.CustomerExitsException;
 import com.klashz.api.coches.exception.EmailException;
+import com.klashz.api.coches.security.Roles;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -14,9 +17,11 @@ import java.util.Optional;
 public class CustomerService implements ICustomerService {
 
     private final ICustomerRepository iCustomerRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(ICustomerRepository iCustomerRepository) {
+    public CustomerService(ICustomerRepository iCustomerRepository, PasswordEncoder passwordEncoder) {
         this.iCustomerRepository = iCustomerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -44,11 +49,21 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public CustomerPasswordDto save(CustomerDto customerDto) {
-        String passwordGenerated = generatePassword(10);
+
         if(!customerDto.getEmail().matches("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")){
             throw new EmailException();
         }
-        customerDto.setPassword(passwordGenerated);
+
+        boolean emailPresentDataBase  = findByEmail(customerDto.getEmail()).isPresent();
+        boolean idPresentDataBase = findById(customerDto.getCarId()).isPresent();
+
+
+        if(idPresentDataBase || emailPresentDataBase){
+            throw  new CustomerExitsException();
+        }
+        String passwordGenerated = generatePassword(10);
+        customerDto.setRol(Roles.CUSTOMER);
+        customerDto.setPassword(passwordEncoder.encode(passwordGenerated));
         customerDto.setActive(1);
         iCustomerRepository.save(customerDto);
         return CustomerPasswordDto.builder()

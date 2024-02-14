@@ -2,12 +2,14 @@ package com.klashz.api.coches.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Dto  del Model Coche
  */
 @Getter
 @Setter
+@ToString
 public class CarDto {
 
     private Long serial;

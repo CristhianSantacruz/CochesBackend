@@ -1,6 +1,7 @@
 package com.klashz.api.coches.controller;
 import com.klashz.api.coches.domain.dto.CustomerDto;
 import com.klashz.api.coches.domain.dto.CustomerPasswordDto;
+import com.klashz.api.coches.domain.service.ICustomerService;
 import com.klashz.api.coches.domain.service.impl.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final ICustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;

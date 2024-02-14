@@ -1,0 +1,16 @@
+package com.klashz.api.coches.domain.dto.purchases;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class CarPurchaseRequestDto {
+
+    private Long purchaseNumberBill;
+    private Long serial;
+    private Integer quantityCar;
+    private Double totalPriceCars;
+}
