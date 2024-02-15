@@ -46,11 +46,11 @@ public class WebSecurityConfig {
                         requests
                                 .requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                 //.requestMatchers(HttpMethod.GET, "/customers").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
-                                .requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
+                                .requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole(Roles.USER, Roles.ADMIN)
                                 .requestMatchers(HttpMethod.DELETE, "/customers/**").hasRole(Roles.ADMIN)
                                 //.requestMatchers(HttpMethod.DELETE, "/customers/**").hasAuthority("ELIMINAR_PRIVILEGE")
 
-                                .requestMatchers(HttpMethod.GET,"/cars/**").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
+                                .requestMatchers(HttpMethod.GET,"/cars/**").hasAnyRole(Roles.USER, Roles.ADMIN)
                                 .requestMatchers(HttpMethod.POST, "/cars/**").hasRole(Roles.ADMIN)
                                 //.requestMatchers("/cars").hasAuthority("COMPRAR_PRIVILEGE")
                                 //.requestMatchers("/customers").hasRole(Roles.ADMIN)

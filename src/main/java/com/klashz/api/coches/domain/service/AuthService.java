@@ -7,6 +7,7 @@ import com.klashz.api.coches.domain.repository.ICustomerRepository;
 import com.klashz.api.coches.exception.CustomerNotExistsException;
 import com.klashz.api.coches.exception.PasswordIncorrectException;
 import com.klashz.api.coches.security.JwtAuthenticationProvider;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,10 +38,16 @@ public class AuthService  implements  IAuthService{
     public JwtResponseDto signIn(AuthCustomerDto authCustomerDto) {
         Optional<CustomerDto> customer = iCustomerRepository.findByEmail(authCustomerDto.getEmail());
 
+
+
         if(customer.isEmpty()){
             throw  new CustomerNotExistsException();
         }
         boolean passwordEquals = passwordEncoder.matches(authCustomerDto.getPassword(),customer.get().getPassword());
+        boolean prueba = authCustomerDto.getPassword().equals(customer.get().getPassword());
+        System.out.println("INFORMACION DEL CLEINTE EMAIL "+ customer.get().getEmail() +"PASSWORD:"+customer.get().getPassword());
+        System.out.println("INFORMACIONDE PASSORD ENCODER:"+authCustomerDto.getPassword());
+        System.out.println(passwordEquals + "--"+prueba);
         if(!passwordEquals){
             throw new PasswordIncorrectException();
         }
