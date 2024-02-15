@@ -62,13 +62,13 @@ public class CustomerService implements ICustomerService {
             throw  new CustomerExitsException();
         }
         String passwordGenerated = generatePassword(10);
-        customerDto.setRol(Roles.CUSTOMER);
+        customerDto.setRol(Roles.USER);
         customerDto.setPassword(passwordEncoder.encode(passwordGenerated));
         customerDto.setActive(1);
         iCustomerRepository.save(customerDto);
         return CustomerPasswordDto.builder()
                 .cardId(customerDto.getCarId())
-                .password(customerDto.getPassword())
+                .password(passwordGenerated)
                 .build();
     }
 

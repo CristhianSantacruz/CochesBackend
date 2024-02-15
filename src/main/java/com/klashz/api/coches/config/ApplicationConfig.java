@@ -1,6 +1,6 @@
 package com.klashz.api.coches.config;
 
-
+/* */
 import com.klashz.api.coches.security.JwtAuthFilter;
 import com.klashz.api.coches.security.JwtAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
@@ -37,3 +37,4 @@ public class ApplicationConfig {
     }
 
 }
+

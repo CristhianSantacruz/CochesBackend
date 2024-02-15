@@ -7,7 +7,6 @@ import com.klashz.api.coches.domain.repository.ICustomerRepository;
 import com.klashz.api.coches.exception.CustomerNotExistsException;
 import com.klashz.api.coches.exception.PasswordIncorrectException;
 import com.klashz.api.coches.security.JwtAuthenticationProvider;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +55,7 @@ public class AuthService  implements  IAuthService{
 
     @Override
     public JwtResponseDto signOut(String jwt) {
+        //falta realizar
         return null;
     }
 }
