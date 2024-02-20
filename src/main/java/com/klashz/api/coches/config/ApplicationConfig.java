@@ -12,11 +12,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * Clase de configuración para la creación de Beans a utilizar
  */
-@RequiredArgsConstructor
+
 @Configuration
 public class ApplicationConfig {
 
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
+
+    public ApplicationConfig(JwtAuthenticationProvider jwtAuthenticationProvider) {
+        this.jwtAuthenticationProvider = jwtAuthenticationProvider;
+    }
 
     /**
      * Bean de Password Encoder para inyeccion

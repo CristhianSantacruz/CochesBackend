@@ -3,13 +3,12 @@ package com.klashz.api.coches.config;
 import com.klashz.api.coches.exception.AccessDeniedHandlerException;
 import com.klashz.api.coches.security.JwtAuthFilter;
 import com.klashz.api.coches.security.Roles;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -18,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -37,28 +37,18 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
+                .cors(withDefaults())
                 .exceptionHandling(exception -> exception.accessDeniedHandler(accessDeniedHandlerException))
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(crf -> crf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests ->
                         requests
                                 .requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                //.requestMatchers(HttpMethod.GET, "/customers").hasAnyRole(Roles.CUSTOMER, Roles.ADMIN)
-                                .requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole(Roles.USER, Roles.ADMIN)
-                                .requestMatchers(HttpMethod.DELETE, "/customers/**").hasRole(Roles.ADMIN)
-                                //.requestMatchers(HttpMethod.DELETE, "/customers/**").hasAuthority("ELIMINAR_PRIVILEGE")
-
-                                .requestMatchers(HttpMethod.GET,"/cars/**").hasAnyRole(Roles.USER, Roles.ADMIN)
-                                .requestMatchers(HttpMethod.POST, "/cars/**").hasRole(Roles.ADMIN)
-                                //.requestMatchers("/cars").hasAuthority("COMPRAR_PRIVILEGE")
-                                //.requestMatchers("/customers").hasRole(Roles.ADMIN)
-
-                                //solo toma el primer filtro, ya no se puede anidar un rol con una autoridad
-
-                                //hasAuthority o hasRole para un solo rol/autoridad
-                                //hasAnyAuthority para varios roles
+                                .requestMatchers(HttpMethod.GET, "/customer/**").hasAnyRole(Roles.USER, Roles.ADMIN)
+                                .requestMatchers(HttpMethod.DELETE, "/customer/**").hasRole(Roles.ADMIN)
+                                .requestMatchers(HttpMethod.GET,"/car/**").hasAnyRole(Roles.USER, Roles.ADMIN)
+                                .requestMatchers(HttpMethod.POST, "/car/**").hasRole(Roles.ADMIN)
                                 .anyRequest().authenticated()
 
                 );

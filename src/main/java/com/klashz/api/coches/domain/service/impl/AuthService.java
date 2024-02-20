@@ -1,9 +1,10 @@
-package com.klashz.api.coches.domain.service;
+package com.klashz.api.coches.domain.service.impl;
 
 import com.klashz.api.coches.domain.dto.AuthCustomerDto;
 import com.klashz.api.coches.domain.dto.CustomerDto;
 import com.klashz.api.coches.domain.dto.JwtResponseDto;
 import com.klashz.api.coches.domain.repository.ICustomerRepository;
+import com.klashz.api.coches.domain.service.IAuthService;
 import com.klashz.api.coches.exception.CustomerNotExistsException;
 import com.klashz.api.coches.exception.PasswordIncorrectException;
 import com.klashz.api.coches.security.JwtAuthenticationProvider;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class AuthService  implements  IAuthService{
+public class AuthService  implements IAuthService {
 
     private final ICustomerRepository iCustomerRepository;
     /**
@@ -35,7 +36,7 @@ public class AuthService  implements  IAuthService{
      */
     @Override
     public JwtResponseDto signIn(AuthCustomerDto authCustomerDto) {
-        Optional<CustomerDto> customer = iCustomerRepository.findByEmail(authCustomerDto.getEmail());
+        Optional<CustomerDto> customer = iCustomerRepository.getCustomerByCardId(authCustomerDto.getEmail());
 
 
 
@@ -43,10 +44,7 @@ public class AuthService  implements  IAuthService{
             throw  new CustomerNotExistsException();
         }
         boolean passwordEquals = passwordEncoder.matches(authCustomerDto.getPassword(),customer.get().getPassword());
-        boolean prueba = authCustomerDto.getPassword().equals(customer.get().getPassword());
-        System.out.println("INFORMACION DEL CLEINTE EMAIL "+ customer.get().getEmail() +"PASSWORD:"+customer.get().getPassword());
-        System.out.println("INFORMACIONDE PASSORD ENCODER:"+authCustomerDto.getPassword());
-        System.out.println(passwordEquals + "--"+prueba);
+
         if(!passwordEquals){
             throw new PasswordIncorrectException();
         }
@@ -54,8 +52,8 @@ public class AuthService  implements  IAuthService{
     }
 
     @Override
-    public JwtResponseDto signOut(String jwt) {
-        //falta realizar
-        return null;
+    public JwtResponseDto signOut(String token) {
+        String[] authElements = token.split(" ");
+        return new JwtResponseDto(jwtAuthenticationProvider.deleteToken(authElements[1]));
     }
 }

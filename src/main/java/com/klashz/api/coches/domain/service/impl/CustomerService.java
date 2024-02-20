@@ -2,6 +2,7 @@ package com.klashz.api.coches.domain.service.impl;
 
 import com.klashz.api.coches.domain.dto.CustomerDto;
 import com.klashz.api.coches.domain.dto.CustomerPasswordDto;
+import com.klashz.api.coches.domain.dto.ResponseCustomerDto;
 import com.klashz.api.coches.domain.repository.ICustomerRepository;
 import com.klashz.api.coches.domain.service.ICustomerService;
 import com.klashz.api.coches.exception.CustomerExitsException;
@@ -25,18 +26,18 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public Optional<CustomerDto> findById(String carId) {
-        return iCustomerRepository.findById(carId);
+    public Optional<CustomerDto> getCustomerByCardId(String carId) {
+        return iCustomerRepository.getCustomerByCardId(carId);
     }
 
     @Override
-    public Optional<CustomerDto> findByEmail(String email) {
-        return iCustomerRepository.findByEmail(email);
+    public Optional<CustomerDto> getCustomerByEmail(String email) {
+        return iCustomerRepository.getCustomerByEmail(email);
     }
 
     @Override
     public Optional<CustomerDto> update(CustomerDto customerDto) {
-        if(iCustomerRepository.findById(customerDto.getCarId()).isEmpty()){
+        if(iCustomerRepository.getCustomerByCardId(customerDto.getCarId()).isEmpty()){
             return Optional.empty();
         }
         return Optional.of(iCustomerRepository.save(customerDto));
@@ -48,40 +49,36 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public CustomerPasswordDto save(CustomerDto customerDto) {
+    public ResponseCustomerDto save(CustomerDto newCustomer) {
 
-        if(!customerDto.getEmail().matches("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$")){
+        if (!newCustomer.getEmail().matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
             throw new EmailException();
         }
 
-        boolean emailPresentDataBase  = findByEmail(customerDto.getEmail()).isPresent();
-        boolean idPresentDataBase = findById(customerDto.getCarId()).isPresent();
-
-
-        if(idPresentDataBase || emailPresentDataBase){
-            throw  new CustomerExitsException();
+        if (getCustomerByCardId(newCustomer.getCarId()).isPresent() || getCustomerByEmail(newCustomer.getEmail()).isPresent()) {
+            throw new CustomerExitsException();
         }
-        String passwordGenerated = generatePassword(10);
-        customerDto.setRol(Roles.USER);
-        customerDto.setPassword(passwordEncoder.encode(passwordGenerated));
-        customerDto.setActive(1);
-        iCustomerRepository.save(customerDto);
-        return CustomerPasswordDto.builder()
-                .cardId(customerDto.getCarId())
-                .password(passwordGenerated)
-                .build();
+
+        String passwordGenerated = generateRandomPassword(10);
+        newCustomer.setPassword(passwordEncoder.encode(passwordGenerated));
+        newCustomer.setActive(1);
+        newCustomer.setRol(Roles.USER);
+        iCustomerRepository.save(newCustomer);
+
+        return new ResponseCustomerDto(passwordGenerated);
     }
 
     @Override
     public boolean delete(String carId) {
-        if(iCustomerRepository.findById(carId).isEmpty()){
+        if(iCustomerRepository.getCustomerByCardId(carId).isEmpty()){
             return false;
         }
         iCustomerRepository.delete(carId);
         return true;
     }
 
-    private String generatePassword(int len){
+    private String generateRandomPassword(int len){
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVRXYWZabcdefghijklmnopqrstuvxwyz1234567890";
         StringBuilder sb = new StringBuilder();
         SecureRandom random = new SecureRandom();

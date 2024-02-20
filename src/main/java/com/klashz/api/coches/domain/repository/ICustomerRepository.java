@@ -14,8 +14,8 @@ import java.util.Optional;
 public interface ICustomerRepository {
 
 
-    Optional<CustomerDto> findById(String carId);
-    Optional<CustomerDto> findByEmail(String email);
+     Optional<CustomerDto>  getCustomerByCardId(String carId);
+    Optional<CustomerDto> getCustomerByEmail(String email);
     List<CustomerDto> getAll();
     CustomerDto save(CustomerDto customerDto);
     void delete(String carId);

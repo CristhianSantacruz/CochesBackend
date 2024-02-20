@@ -23,13 +23,13 @@ public class CustomerRepository  implements ICustomerRepository {
 
 
     @Override
-    public Optional<CustomerDto> findById(String carId) {
+    public Optional<CustomerDto> getCustomerByCardId(String carId) {
         return iCustomerJpaRepository.findById(carId)
                 .map(iCustomerMapper::toCustomerDto);
     }
 
     @Override
-    public Optional<CustomerDto> findByEmail(String email) {
+    public Optional<CustomerDto>  getCustomerByEmail(String email) {
         return iCustomerJpaRepository.findByEmail(email)
                 .map(iCustomerMapper::toCustomerDto);
     }
@@ -41,8 +41,7 @@ public class CustomerRepository  implements ICustomerRepository {
 
     @Override
     public CustomerDto save(CustomerDto customerDto) {
-        CustomerEntity customerEntity = iCustomerMapper.toCustomerEntity(customerDto);
-        return iCustomerMapper.toCustomerDto(iCustomerJpaRepository.save(customerEntity));
+        return iCustomerMapper.toCustomerDto(iCustomerJpaRepository.save(iCustomerMapper.toCustomerEntity(customerDto)));
     }
 
     @Override

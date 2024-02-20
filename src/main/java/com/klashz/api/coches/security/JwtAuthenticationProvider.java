@@ -11,9 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -43,6 +41,7 @@ public class JwtAuthenticationProvider {
                 .withClaim("fullname",customerJwt.getFullName())
                 .withClaim("numberCellPhone",customerJwt.getPhone())
                 .withClaim("email",customerJwt.getEmail())
+                .withClaim("rol",customerJwt.getRol())
                 .withIssuedAt(now)
                 .withExpiresAt(validity)
                 .sign(algorithm);
@@ -69,18 +68,6 @@ public class JwtAuthenticationProvider {
         if (exists == null) {
             throw new BadCredentialsException("Usuario no registrado.");
         }
-
-
-        //Creo un UserDetails pero cuando voy a roles() lo que esta es una nueva autoridad con prefijo ROLES_
-        /*
-        UserDetails userTest = User.withUsername(exists.getFullName()).password(exists.getPassword()).roles(exists.getRol()).build();
-        userTest.getAuthorities().forEach(System.out::println);
-        System.out.println("imprimiendo userDetails");
-        System.out.println(userTest);*/
-
-        //return new UsernamePasswordAuthenticationToken(userTest, token, userTest.getAuthorities());
-
-        //return new UsernamePasswordAuthenticationToken(userTest, token, Collections.singletonList(new SimpleGrantedAuthority("WRITE_PRIVILEGE")));
 
         HashSet<SimpleGrantedAuthority> rolesAndAuthorities = new HashSet<>();
         rolesAndAuthorities.add(new SimpleGrantedAuthority("ROLE_"+exists.getRol())); //rol
