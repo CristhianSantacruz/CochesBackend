@@ -16,17 +16,17 @@ public class CarPurchaseEntity {
     private CarPurchasePK id;
 
     @Column(name = "cantidad")
-    private Integer quantityCars;
-    @Column(name = "total")
-    private Double totalPriceCars;
+    private Integer quantity;
 
-    @ManyToOne()
-    @MapsId(value = "purchaseNumberBill")
-    @JoinColumn(name = "compras_numero_factura",insertable = false, updatable = false)
-    private PurchaseEntity purchaseEntity;
+    private double total;
 
     @ManyToOne
-    @MapsId(value="codeCar")
-    @JoinColumn(name="coches_codigo_coche",insertable = false,updatable = false)
+    @MapsId(value = "purchaseNumberBill")
+    @JoinColumn(name = "compras_numero_factura", insertable = false, updatable = false)
+    private PurchaseEntity purchaseEntity;
+
+    @ManyToOne()
+    //@MapsId(value="codeCard")
+    @JoinColumn(name = "coches_codigo_coche", insertable = false, updatable = false)
     private CarEntity carEntity;
 }

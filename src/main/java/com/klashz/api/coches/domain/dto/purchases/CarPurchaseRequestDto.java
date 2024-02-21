@@ -10,7 +10,7 @@ import lombok.Setter;
 public class CarPurchaseRequestDto {
 
     private Long purchaseNumberBill;
-    private Long serial;
+    private Long codeCar;
     private Integer quantityCar;
     private Double totalPriceCars;
 }

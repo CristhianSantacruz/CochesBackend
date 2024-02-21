@@ -37,7 +37,7 @@ public class JwtAuthenticationProvider {
         Date validity = new Date(now.getTime() +  3600000);
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         String tokenCreated = JWT.create()
-                .withClaim("carId",customerJwt.getCarId())
+                .withClaim("carId",customerJwt.getCardId())
                 .withClaim("fullname",customerJwt.getFullName())
                 .withClaim("numberCellPhone",customerJwt.getPhone())
                 .withClaim("email",customerJwt.getEmail())

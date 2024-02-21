@@ -7,7 +7,6 @@ import com.klashz.api.coches.domain.service.impl.CustomerService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

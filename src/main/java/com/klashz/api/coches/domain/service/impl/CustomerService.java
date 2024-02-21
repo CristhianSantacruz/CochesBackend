@@ -37,7 +37,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Optional<CustomerDto> update(CustomerDto customerDto) {
-        if(iCustomerRepository.getCustomerByCardId(customerDto.getCarId()).isEmpty()){
+        if(iCustomerRepository.getCustomerByCardId(customerDto.getCardId()).isEmpty()){
             return Optional.empty();
         }
         return Optional.of(iCustomerRepository.save(customerDto));
@@ -56,7 +56,7 @@ public class CustomerService implements ICustomerService {
             throw new EmailException();
         }
 
-        if (getCustomerByCardId(newCustomer.getCarId()).isPresent() || getCustomerByEmail(newCustomer.getEmail()).isPresent()) {
+        if (getCustomerByCardId(newCustomer.getCardId()).isPresent() || getCustomerByEmail(newCustomer.getEmail()).isPresent()) {
             throw new CustomerExitsException();
         }
 

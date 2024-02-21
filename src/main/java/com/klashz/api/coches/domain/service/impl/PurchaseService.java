@@ -39,8 +39,7 @@ public class PurchaseService  implements IPurchaseService {
         PurchaseResponseDto purchaseResponseDto = iPurchaseRepository.getByNumberBill(numberBill);
 
         if (purchaseResponseDto == null) {
-            throw new PurchaseNotExistException(); // CHANGE
-
+            throw new PurchaseNotExistException();
         }
 
         return purchaseResponseDto;
@@ -51,7 +50,7 @@ public class PurchaseService  implements IPurchaseService {
         PurchaseBillResponseDto billResponseDto = iPurchaseRepository.save(purchaseRequestDto);
 
         purchaseRequestDto.getCarPurchases().forEach(carPurchase -> {
-            CarDto carActual = iCarRepository.findById(carPurchase.getSerial()).get();
+            CarDto carActual = iCarRepository.findById(carPurchase.getCodeCar()).get();
 
             carActual.setStock(carActual.getStock() - carPurchase.getQuantityCar());
 

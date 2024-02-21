@@ -8,8 +8,7 @@ import java.util.List;
 
 public interface IPurchaseJpaRepository extends JpaRepository<PurchaseEntity, Long> {
 
-    @Query("select p from PurchaseEntity p where p.cardId =?1")
-    List<PurchaseEntity> findAllByCardId(String id);
 
+    List<PurchaseEntity> findAllByCardId(String id);
 
 }

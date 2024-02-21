@@ -36,10 +36,7 @@ public class AuthService  implements IAuthService {
      */
     @Override
     public JwtResponseDto signIn(AuthCustomerDto authCustomerDto) {
-        Optional<CustomerDto> customer = iCustomerRepository.getCustomerByCardId(authCustomerDto.getEmail());
-
-
-
+        Optional<CustomerDto> customer = iCustomerRepository.getCustomerByEmail(authCustomerDto.getEmail());
         if(customer.isEmpty()){
             throw  new CustomerNotExistsException();
         }

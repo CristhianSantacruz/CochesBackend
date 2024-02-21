@@ -21,6 +21,20 @@ public class PurchaseEntity {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
+
+    @Override
+    public String toString() {
+        return "PurchaseEntity{" +
+                "numberBill=" + numberBill +
+                ", cardId='" + cardId + '\'' +
+                ", date=" + date +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", total=" + total +
+                ", carPurchases=" + carPurchases +
+                ", customerEntity=" + customerEntity +
+                '}';
+    }
+
     @Column(name = "medio_pago")
     private String paymentMethod;
     @Column(name = "total")

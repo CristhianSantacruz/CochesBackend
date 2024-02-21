@@ -9,6 +9,18 @@ import java.util.List;
 @Setter
 public class PurchaseResponseDto {
 
+    @Override
+    public String toString() {
+        return "PurchaseResponseDto{" +
+                "numberBill=" + numberBill +
+                ", cardId='" + cardId + '\'' +
+                ", date=" + date +
+                ", total=" + total +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", carPurchasesResponses=" + carPurchasesResponses +
+                '}';
+    }
+
     private Long numberBill;
     private String cardId;
     private LocalDateTime date;

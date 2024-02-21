@@ -14,7 +14,7 @@ public class CustomerEntity {
 
     @Id
     @Column(name = "cedula")
-    private String carId;
+    private String cardId;
 
     @Column(name = "activo")
     private Integer active;

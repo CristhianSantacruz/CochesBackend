@@ -14,6 +14,7 @@ public class CarDto {
 
     private Long serial;
     private Long branCardId;
+    private String brandCarEntity; // nuevo atributo
     private String reference;
     private Double price;
     private Double yearModel;

@@ -52,7 +52,7 @@ public class CarEntity {
     @JoinColumn(name = "marca_coche_id",insertable = false,updatable = false)
     private BrandCarEntity brandCarEntity;
 
-    @OneToMany(mappedBy = "carEntity",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "carEntity")
     private List<CarPurchaseEntity> carPurchaseEntities;
 
 }

@@ -13,7 +13,7 @@ import lombok.ToString;
 public class CustomerDto {
 
 
-    private String carId;
+    private String cardId;
 
     private Integer active;
 

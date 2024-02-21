@@ -7,11 +7,11 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = {ICarPurchaseMapper.class})
 public interface IPurchaseMapper {
 
 
-    PurchaseRequestDto toPurchaseDto(PurchaseEntity purchaseEntity);
+    //PurchaseRequestDto toPurchaseDto(PurchaseEntity purchaseEntity);
     @Mapping(target = "customerEntity",ignore = true)
     PurchaseEntity toPurchaseEntity(PurchaseRequestDto  purchaseRequestDto);
 

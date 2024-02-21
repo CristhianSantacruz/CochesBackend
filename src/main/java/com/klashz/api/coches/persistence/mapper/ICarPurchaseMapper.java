@@ -7,7 +7,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ICarPurchaseMapper {
-    @Mapping(source = "serial", target = "id.codeCar")
+    @Mapping(target = "quantity", source = "quantityCar")
+    @Mapping(target = "total",source = "totalPriceCars")
+    @Mapping(source = "codeCar", target = "id.codeCar")
     @Mapping(target  = "purchaseEntity", ignore = true)
     @Mapping(target = "carEntity",ignore = true)
     @Mapping(target = "id.purchaseNumberBill",ignore = true)
