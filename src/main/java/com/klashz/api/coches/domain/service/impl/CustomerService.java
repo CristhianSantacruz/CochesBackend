@@ -59,14 +59,13 @@ public class CustomerService implements ICustomerService {
         if (getCustomerByCardId(newCustomer.getCardId()).isPresent() || getCustomerByEmail(newCustomer.getEmail()).isPresent()) {
             throw new CustomerExitsException();
         }
-
-        String passwordGenerated = generateRandomPassword(10);
-        newCustomer.setPassword(passwordEncoder.encode(passwordGenerated));
+        String passwordUser = newCustomer.getPassword();
+        newCustomer.setPassword(passwordEncoder.encode(passwordUser));
         newCustomer.setActive(1);
         newCustomer.setRol(Roles.USER);
         iCustomerRepository.save(newCustomer);
 
-        return new ResponseCustomerDto(passwordGenerated);
+        return new ResponseCustomerDto(newCustomer.getFullName());
     }
 
     @Override
@@ -78,14 +77,4 @@ public class CustomerService implements ICustomerService {
         return true;
     }
 
-    private String generateRandomPassword(int len){
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVRXYWZabcdefghijklmnopqrstuvxwyz1234567890";
-        StringBuilder sb = new StringBuilder();
-        SecureRandom random = new SecureRandom();
-        for(int i = 0 ; i< len ; i++ ){
-            int randomIndex= random.nextInt(chars.length());
-            sb.append(chars.charAt(randomIndex));
-        }
-        return sb.toString();
-    }
 }

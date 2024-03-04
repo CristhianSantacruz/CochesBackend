@@ -15,11 +15,9 @@ import java.util.List;
 public class PurchaseController {
 
     private final IPurchaseService iPurchaseService;
-
     public PurchaseController(IPurchaseService iPurchaseService) {
         this.iPurchaseService = iPurchaseService;
     }
-
     @GetMapping()
     public ResponseEntity<List<PurchaseResponseDto>> getAll(){
         return ResponseEntity.ok(iPurchaseService.getAll());
@@ -28,13 +26,11 @@ public class PurchaseController {
     public ResponseEntity<List<PurchaseResponseDto>> getAllCustomers(@PathVariable String cardId){
         return ResponseEntity.ok(iPurchaseService.getByIdCustomer(cardId));
     }
-
     @GetMapping("/{numberBill}")
     public ResponseEntity<PurchaseResponseDto> getPurchasesByNumberBill(
             @PathVariable Long numberBill){
         return ResponseEntity.ok(iPurchaseService.getByNumberBill(numberBill));
     }
-
     @PostMapping()
     public ResponseEntity<PurchaseBillResponseDto> savePurchase(@RequestBody PurchaseRequestDto purchaseRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED)

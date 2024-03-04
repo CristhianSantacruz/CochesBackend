@@ -41,6 +41,10 @@ public class AuthService  implements IAuthService {
             throw  new CustomerNotExistsException();
         }
         boolean passwordEquals = passwordEncoder.matches(authCustomerDto.getPassword(),customer.get().getPassword());
+        System.out.println("DATOS ");
+        System.out.println(passwordEquals);
+        System.out.println(authCustomerDto.getPassword());
+        System.out.println(customer.get().getPassword());
 
         if(!passwordEquals){
             throw new PasswordIncorrectException();

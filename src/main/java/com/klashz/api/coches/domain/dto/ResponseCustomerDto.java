@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ResponseCustomerDto {
-    private String passwordGenerated;
+    private String  userName;
 
-    public ResponseCustomerDto(String passwordGenerated) {
-        this.passwordGenerated = passwordGenerated;
+    public ResponseCustomerDto(String userName) {
+        this.userName= userName;
     }
 }

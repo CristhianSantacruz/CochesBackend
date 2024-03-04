@@ -23,12 +23,10 @@ public class PurchaseRepository implements IPurchaseRepository {
 
     private final IPurchaseJpaRepository iPurchaseCrudRepository;
     private final IPurchaseMapper iPurchaseMapper;
-
     public PurchaseRepository(IPurchaseJpaRepository iPurchaseJpaRepository, IPurchaseMapper iPurchaseMapper) {
         this.iPurchaseCrudRepository = iPurchaseJpaRepository;
         this.iPurchaseMapper = iPurchaseMapper;
     }
-
     @Override
     public List<PurchaseResponseDto> getAll() {
 
@@ -39,7 +37,6 @@ public class PurchaseRepository implements IPurchaseRepository {
 
         return listPurchaseResponseDto;
     }
-
     @Override
     public List<PurchaseResponseDto> getByIdCustomer(String idCustomer) {
         List<PurchaseEntity> listPurchasesEntity = iPurchaseCrudRepository.findAllByCardId(idCustomer);
@@ -49,7 +46,6 @@ public class PurchaseRepository implements IPurchaseRepository {
 
         return listPurchaseResponseDto;
     }
-
     @Override
     public PurchaseResponseDto getByNumberBill(Long numberBill) {
         Optional<PurchaseEntity> purchaseEntitySearch = iPurchaseCrudRepository.findById(numberBill);
@@ -60,7 +56,6 @@ public class PurchaseRepository implements IPurchaseRepository {
 
         return toPurchaseResponseDtoByEntity(purchaseEntitySearch.get());
     }
-
     @Override
     public PurchaseBillResponseDto save(PurchaseRequestDto purchaseRequestDto) {
         PurchaseEntity purchaseEntity = iPurchaseMapper.toPurchaseEntity(purchaseRequestDto);
@@ -68,8 +63,6 @@ public class PurchaseRepository implements IPurchaseRepository {
         PurchaseEntity purchaseEntitySave = iPurchaseCrudRepository.save(purchaseEntity);
         return new PurchaseBillResponseDto(purchaseEntitySave.getNumberBill());
     }
-
-
     public PurchaseResponseDto toPurchaseResponseDtoByEntity(PurchaseEntity purchaseEntity) {
         PurchaseResponseDto purchaseResponseDto = new PurchaseResponseDto();
         purchaseResponseDto.setNumberBill(purchaseEntity.getNumberBill());

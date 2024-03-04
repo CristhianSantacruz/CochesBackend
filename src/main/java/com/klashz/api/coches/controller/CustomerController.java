@@ -19,11 +19,9 @@ import java.util.List;
 public class CustomerController {
 
     private final ICustomerService customerService;
-
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
-
    @PostMapping()
     public ResponseEntity<ResponseCustomerDto> save(@RequestBody CustomerDto customerDto){
         ResponseCustomerDto customerDto1 = customerService.save(customerDto);
@@ -37,22 +35,18 @@ public class CustomerController {
     public ResponseEntity<CustomerDto> getFindById(@PathVariable String cardId){
         return ResponseEntity.of(customerService.getCustomerByCardId(cardId));
     }
-
     @GetMapping
     public ResponseEntity<List<CustomerDto>> findAll(){
         return ResponseEntity.ok(customerService.getAll());
     }
-
     @GetMapping("/{email}")
     public ResponseEntity<CustomerDto> getFindByEmail(@PathVariable String email){
         return ResponseEntity.of(customerService.getCustomerByEmail(email));
     }
-
     @PutMapping()
     public ResponseEntity<CustomerDto> update(@RequestBody CustomerDto customerDto){
         return ResponseEntity.of(customerService.update(customerDto));
     }
-
     @DeleteMapping("/{cardId}")
     public ResponseEntity<Boolean> delete(@PathVariable String cardId){
         return new ResponseEntity<>(customerService.delete(cardId)

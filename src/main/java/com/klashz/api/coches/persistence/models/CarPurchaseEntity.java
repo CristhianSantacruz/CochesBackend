@@ -29,4 +29,5 @@ public class CarPurchaseEntity {
     //@MapsId(value="codeCard")
     @JoinColumn(name = "coches_codigo_coche", insertable = false, updatable = false)
     private CarEntity carEntity;
+
 }

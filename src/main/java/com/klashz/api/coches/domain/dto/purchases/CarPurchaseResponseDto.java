@@ -13,7 +13,8 @@ public class CarPurchaseResponseDto {
     private Integer quantity;
     private Double total;
 
-    public CarPurchaseResponseDto(String referenceCar, Integer quantity, Double total) {
+
+    public CarPurchaseResponseDto(String referenceCar, Integer quantity, Double total){
         this.referenceCar = referenceCar;
         this.quantity = quantity;
         this.total = total;

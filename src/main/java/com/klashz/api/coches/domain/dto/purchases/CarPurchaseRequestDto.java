@@ -11,6 +11,6 @@ public class CarPurchaseRequestDto {
 
     private Long purchaseNumberBill;
     private Long codeCar;
-    private Integer quantityCar;
-    private Double totalPriceCars;
+    private Integer quantity;
+    private Double total;
 }
