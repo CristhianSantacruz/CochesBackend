@@ -1,10 +1,10 @@
-package com.klashz.api.coches.exception.persistence.repository.impl;
+package com.klashz.api.coches.persistence.repository.impl;
 
 import com.klashz.api.coches.domain.dto.CarDto;
 import com.klashz.api.coches.domain.repository.ICarRepository;
-import com.klashz.api.coches.exception.persistence.mapper.ICarMapper;
-import com.klashz.api.coches.exception.persistence.models.CarEntity;
-import com.klashz.api.coches.exception.persistence.repository.ICarJpaRepository;
+import com.klashz.api.coches.persistence.mapper.ICarMapper;
+import com.klashz.api.coches.persistence.models.CarEntity;
+import com.klashz.api.coches.persistence.repository.ICarJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

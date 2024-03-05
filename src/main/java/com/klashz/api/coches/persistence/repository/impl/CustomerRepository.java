@@ -1,9 +1,10 @@
-package com.klashz.api.coches.exception.persistence.repository.impl;
+package com.klashz.api.coches.persistence.repository.impl;
 
 import com.klashz.api.coches.domain.dto.CustomerDto;
 import com.klashz.api.coches.domain.repository.ICustomerRepository;
-import com.klashz.api.coches.exception.persistence.repository.ICustomerJpaRepository;
-import com.klashz.api.coches.exception.persistence.mapper.ICustomerMapper;
+import com.klashz.api.coches.persistence.mapper.ICustomerMapper;
+import com.klashz.api.coches.persistence.models.CustomerEntity;
+import com.klashz.api.coches.persistence.repository.ICustomerJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

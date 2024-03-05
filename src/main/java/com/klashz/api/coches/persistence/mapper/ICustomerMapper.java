@@ -1,7 +1,7 @@
-package com.klashz.api.coches.exception.persistence.mapper;
+package com.klashz.api.coches.persistence.mapper;
 
 import com.klashz.api.coches.domain.dto.CustomerDto;
-import com.klashz.api.coches.exception.persistence.models.CustomerEntity;
+import com.klashz.api.coches.persistence.models.CustomerEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

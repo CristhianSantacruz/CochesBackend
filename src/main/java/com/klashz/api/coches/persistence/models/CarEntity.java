@@ -1,4 +1,4 @@
-package com.klashz.api.coches.exception.persistence.models;
+package com.klashz.api.coches.persistence.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
