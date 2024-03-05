@@ -1,7 +1,7 @@
-package com.klashz.api.coches.persistence.mapper;
+package com.klashz.api.coches.exception.persistence.mapper;
 
 import com.klashz.api.coches.domain.dto.BrandCarDto;
-import com.klashz.api.coches.persistence.models.BrandCarEntity;
+import com.klashz.api.coches.exception.persistence.models.BrandCarEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

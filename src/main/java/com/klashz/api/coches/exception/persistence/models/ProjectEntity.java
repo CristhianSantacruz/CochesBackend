@@ -1,4 +1,4 @@
-package com.klashz.api.coches.persistence.models;
+package com.klashz.api.coches.exception.persistence.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +15,7 @@ public class ProjectEntity {
     private Long id;
     @Column(name = "titulo")
     private String title;
-    @Column(name = " descripcion")
+    @Column(name = " descripcion",length = 1024)
     private String description;
     @Column(name = "linkGithubFronted")
     private String urlGithubFrontend;

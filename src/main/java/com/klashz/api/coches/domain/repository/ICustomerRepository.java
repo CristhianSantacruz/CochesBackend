@@ -1,10 +1,7 @@
 package com.klashz.api.coches.domain.repository;
 
-import com.klashz.api.coches.domain.dto.BrandCarDto;
 import com.klashz.api.coches.domain.dto.CustomerDto;
-import com.klashz.api.coches.persistence.models.CustomerEntity;
 
-import javax.print.DocFlavor;
 import java.util.List;
 import java.util.Optional;
 

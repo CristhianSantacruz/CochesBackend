@@ -1,6 +1,5 @@
-package com.klashz.api.coches.persistence.models;
+package com.klashz.api.coches.exception.persistence.models;
 
-import com.klashz.api.coches.domain.dto.purchases.CarPurchaseRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -35,13 +35,7 @@ public class CustomerService implements ICustomerService {
         return iCustomerRepository.getCustomerByEmail(email);
     }
 
-    @Override
-    public Optional<CustomerDto> update(CustomerDto customerDto) {
-        if(iCustomerRepository.getCustomerByCardId(customerDto.getCardId()).isEmpty()){
-            return Optional.empty();
-        }
-        return Optional.of(iCustomerRepository.save(customerDto));
-    }
+
 
     @Override
     public List<CustomerDto> getAll() {
@@ -66,6 +60,15 @@ public class CustomerService implements ICustomerService {
         iCustomerRepository.save(newCustomer);
 
         return new ResponseCustomerDto(newCustomer.getFullName());
+    }
+    @Override
+    public Optional<CustomerDto> update(CustomerDto updateCustomerDto) {
+        if(iCustomerRepository.getCustomerByCardId(updateCustomerDto.getCardId()).isEmpty()){
+            return Optional.empty();
+        }
+        String passwordUser = updateCustomerDto.getPassword();
+        updateCustomerDto.setPassword(passwordEncoder.encode(passwordUser));
+        return Optional.of(iCustomerRepository.save(updateCustomerDto));
     }
 
     @Override

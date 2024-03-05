@@ -1,8 +1,7 @@
-package com.klashz.api.coches.persistence.repository;
+package com.klashz.api.coches.exception.persistence.repository;
 
-import com.klashz.api.coches.persistence.models.PurchaseEntity;
+import com.klashz.api.coches.exception.persistence.models.PurchaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

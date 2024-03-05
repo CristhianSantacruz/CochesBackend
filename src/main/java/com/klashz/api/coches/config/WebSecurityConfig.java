@@ -51,7 +51,7 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.DELETE, "/marca/**").hasRole(Roles.ADMIN)
                                 .requestMatchers(HttpMethod.GET,"/car/**").hasAnyRole(Roles.USER, Roles.ADMIN)
                                 .requestMatchers(HttpMethod.POST, "/car/**").hasRole(Roles.ADMIN)
-                                .requestMatchers(HttpMethod.POST,"/project/**").hasRole(Roles.ADMIN)
+                                .requestMatchers(HttpMethod.POST,"/project/**").hasAnyRole(Roles.ADMIN)
                                 .anyRequest().authenticated()
 
                 );

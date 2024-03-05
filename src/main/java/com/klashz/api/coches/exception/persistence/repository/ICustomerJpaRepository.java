@@ -1,7 +1,6 @@
-package com.klashz.api.coches.persistence.repository;
+package com.klashz.api.coches.exception.persistence.repository;
 
-import com.klashz.api.coches.persistence.models.CarEntity;
-import com.klashz.api.coches.persistence.models.CustomerEntity;
+import com.klashz.api.coches.exception.persistence.models.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
