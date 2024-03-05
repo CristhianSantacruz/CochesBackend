@@ -44,8 +44,10 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(requests ->
                         requests
-                                .requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**","/marca").permitAll()
+                                .requestMatchers("/auth/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**","/marca","/customer/id/**","/customer/update").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/customer/**").hasAnyRole(Roles.USER, Roles.ADMIN)
+                                .requestMatchers(HttpMethod.PUT, "/customer/update").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/customer").hasRole(Roles.ADMIN)
                                 .requestMatchers(HttpMethod.DELETE, "/customer/**").hasRole(Roles.ADMIN)
                                 .requestMatchers(HttpMethod.DELETE, "/car/**").hasRole(Roles.ADMIN)
                                 .requestMatchers(HttpMethod.DELETE, "/marca/**").hasRole(Roles.ADMIN)

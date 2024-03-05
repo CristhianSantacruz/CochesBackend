@@ -43,7 +43,7 @@ public class CustomerController {
     public ResponseEntity<CustomerDto> getFindByEmail(@PathVariable String email){
         return ResponseEntity.of(customerService.getCustomerByEmail(email));
     }
-    @PutMapping()
+    @PutMapping("/update")
     public ResponseEntity<CustomerDto> update(@RequestBody CustomerDto customerDto){
         return ResponseEntity.of(customerService.update(customerDto));
     }
